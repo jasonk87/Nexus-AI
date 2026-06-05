@@ -552,10 +552,16 @@ export default function App() {
         let rawContent = "";
         
         if (selectedModel.provider === 'google') {
+          const config: any = { systemInstruction };
+          if (selectedModel.id === 'gemini-2.5-flash-lite') {
+            config.thinkingConfig = {
+              thinkingBudget: 8192
+            };
+          }
           const textResponse = await ai.models.generateContent({
             model: selectedModel.id,
             contents,
-            config: { systemInstruction }
+            config
           });
           rawContent = textResponse.text || "";
         } else {
@@ -685,10 +691,16 @@ export default function App() {
         let assistantText = "";
 
         if (selectedModel.provider === 'google') {
+          const config: any = { systemInstruction };
+          if (selectedModel.id === 'gemini-2.5-flash-lite') {
+            config.thinkingConfig = {
+              thinkingBudget: 8192
+            };
+          }
           const textResponse = await ai.models.generateContent({
             model: selectedModel.id,
             contents: updatedMessages.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.content }] })),
-            config: { systemInstruction },
+            config,
           });
           assistantText = textResponse.text || "I'm processing your request...";
         } else {
