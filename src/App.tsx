@@ -555,7 +555,7 @@ export default function App() {
           const config: any = { systemInstruction };
           if (selectedModel.id === 'gemini-2.5-flash-lite') {
             config.thinkingConfig = {
-              thinkingBudget: 8192
+              thinkingBudget: 32768
             };
           }
           const textResponse = await ai.models.generateContent({
@@ -694,7 +694,7 @@ export default function App() {
           const config: any = { systemInstruction };
           if (selectedModel.id === 'gemini-2.5-flash-lite') {
             config.thinkingConfig = {
-              thinkingBudget: 8192
+              thinkingBudget: 32768
             };
           }
           const textResponse = await ai.models.generateContent({
